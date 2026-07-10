@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+﻿import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthStore } from '@/stores/authStore'
 import Layout from '@/components/layout/Layout'
 import LoginPage from '@/pages/auth/LoginPage'
@@ -33,14 +33,18 @@ export default function App() {
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="tasks" element={<TasksPage />} />
+          <Route path="queue" element={<QueuePage />} />
           <Route path="imports" element={
             <AdminRoute><ImportsPage /></AdminRoute>
           } />
           <Route path="users" element={
             <AdminRoute><UsersPage /></AdminRoute>
           } />
-          <Route path="queue" element={<QueuePage />} />
           <Route path="reports" element={<ReportsPage />} />
         </Route>
 
-   
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
