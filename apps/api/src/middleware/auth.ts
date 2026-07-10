@@ -3,7 +3,7 @@ import { verify } from 'hono/jwt'
 import { Env } from '../index'
 
 export type JWTPayload = {
-  sub: string      // userId
+  sub: string
   email: string
   role: 'admin' | 'monitor' | 'coordinator'
   iat: number
@@ -24,15 +24,15 @@ export async function authMiddleware(c: Context<{ Bindings: Env }>, next: Next) 
 
   const token = authHeader.slice(7)
   try {
-    const payload = await verify(token, c.env.JWT_SECRET) as JWTPayload
+    const payload = await verify(token, c.env.JWT_SECRET, 'HS256') as JWTPayload
     c.set('user', payload)
     await next()
-  } catch {
-    return c.json({ error: 'Token inválido ou expirado' }, 401)
+  } catch (e) {
+    console.error('[AUTH ERROR]', e)
+    return c.json({ error: 'Token inválido ou expirado', detail: String(e) }, 401)
   }
 }
 
-// ── RBAC helpers ─────────────────────────────────────────────────────────────
 export function requireRole(...roles: JWTPayload['role'][]) {
   return async (c: Context<{ Bindings: Env }>, next: Next) => {
     const user = c.get('user')
