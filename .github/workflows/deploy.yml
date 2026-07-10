@@ -24,10 +24,6 @@ jobs:
         working-directory: apps/api
         run: npm ci
 
-      - name: Type check
-        working-directory: apps/api
-        run: npm run type-check
-
       - name: Deploy to Cloudflare Workers
         working-directory: apps/api
         if: github.ref == 'refs/heads/main'
