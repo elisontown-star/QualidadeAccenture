@@ -7,6 +7,7 @@ import TasksPage from '@/pages/tasks/TasksPage'
 import ImportsPage from '@/pages/imports/ImportsPage'
 import UsersPage from '@/pages/users/UsersPage'
 import ReportsPage from '@/pages/reports/ReportsPage'
+import QueuePage from '@/pages/queue/QueuePage'
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuthStore()
@@ -38,11 +39,8 @@ export default function App() {
           <Route path="users" element={
             <AdminRoute><UsersPage /></AdminRoute>
           } />
+          <Route path="queue" element={<QueuePage />} />
           <Route path="reports" element={<ReportsPage />} />
         </Route>
 
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
-  )
-}
+   

@@ -1,17 +1,18 @@
 import { NavLink } from 'react-router-dom'
 import {
   LayoutDashboard, ClipboardList, Upload,
-  Users, BarChart3, Shield
+  Users, BarChart3, Shield, ListOrdered
 } from 'lucide-react'
 import { useAuthStore } from '@/stores/authStore'
 import clsx from 'clsx'
 
 const navItems = [
-  { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', roles: ['admin', 'monitor', 'coordinator'] },
-  { to: '/tasks',     icon: ClipboardList,   label: 'Tarefas',   roles: ['admin', 'monitor', 'coordinator'] },
+  { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard',  roles: ['admin', 'monitor', 'coordinator'] },
+  { to: '/tasks',     icon: ClipboardList,   label: 'Tarefas',    roles: ['admin', 'monitor', 'coordinator'] },
+  { to: '/queue',     icon: ListOrdered,     label: 'Fila',       roles: ['admin', 'monitor', 'coordinator'] },
   { to: '/imports',   icon: Upload,          label: 'Importação', roles: ['admin'] },
   { to: '/reports',   icon: BarChart3,       label: 'Relatórios', roles: ['admin', 'coordinator'] },
-  { to: '/users',     icon: Users,           label: 'Usuários',  roles: ['admin'] },
+  { to: '/users',     icon: Users,           label: 'Usuários',   roles: ['admin'] },
 ]
 
 export default function Sidebar() {
@@ -63,10 +64,4 @@ export default function Sidebar() {
           </div>
           <div className="min-w-0">
             <p className="text-white text-xs font-medium truncate">{user?.name}</p>
-            <p className="text-primary-400 text-xs capitalize">{user?.role}</p>
-          </div>
-        </div>
-      </div>
-    </aside>
-  )
-}
+            <p c
