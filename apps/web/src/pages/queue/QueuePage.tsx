@@ -54,7 +54,7 @@ export default function QueuePage() {
     setLoading(true)
     try {
       const params: Record<string, string> = { status: 'assigned', limit: '50' }
-      if (selectedMonitor) params.monitor_id = selectedMonitor
+      if (selectedMonitor) params.assigned_to = selectedMonitor
 
       const [voiceRes, chatRes] = await Promise.all([
         tasksApi.list({ ...params, call_type: 'phone' }),
